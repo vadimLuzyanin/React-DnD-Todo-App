@@ -15,11 +15,20 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import TextField from '@material-ui/core/TextField'
 
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(2),
         marginBottom: theme.spacing(2),
+
+    },
+    paperTransition: {
+        padding: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        transform: 'translateX(110%)',
+        transitionProperty: 'transform',
+        transitionDuration: '0.5s'
     },
     button: {
         marginLeft: theme.spacing(1),
@@ -36,10 +45,15 @@ const useStyles = makeStyles(theme => ({
             flexDirection: 'column',
             alignItems: 'flex-end',
         }
-    }
+    },
+    next: {
+        fontSize: '50px',
+        marginRight: '-25px',
+        color: theme.palette.primary.main,
+    },
 }))
 
-const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTaskEdit }) => {
+const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTaskEdit, mobile, handleTaskMobileMove, isDragDisabled, disableDrag }) => {
     const classes = useStyles();
 
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -78,12 +92,31 @@ const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTa
         setEditDialogOpen(false);
     }
 
+    const [sentToNextColumn, setSentToNextColumn] = useState(false);
+
+    const handleSend = (currentColumn) => {
+        setSentToNextColumn(true);
+        disableDrag(true);
+        let nextColumnId;
+        setTimeout(() => {
+            switch (currentColumn) {
+                case 'todo': nextColumnId = 'doing';
+                    break;
+                case 'doing': nextColumnId = 'done';
+                    break;
+                default: break;
+            }
+            handleTaskMobileMove(taskId, columnId, nextColumnId);
+            disableDrag(false);
+        }, 500);
+    }
+
     return (
-        <Draggable draggableId={taskId} index={index}>
+        <Draggable draggableId={taskId} index={index} isDragDisabled={isDragDisabled}>
             {(provided, snapshot) => (
                 <ListItem
                     component={Paper}
-                    className={classes.paper}
+                    className={sentToNextColumn ? classes.paperTransition : classes.paper}
                     elevation={snapshot.isDragging ? 6 : 1}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -100,6 +133,9 @@ const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTa
                             <Button variant='outlined' color='secondary' className={classes.buttonInner} onClick={handleDeleteDialogOpen}>delete</Button>
                         </ListItemIcon>
                     </div>
+                    {mobile && columnId !== 'done' && <ListItemIcon className={classes.next} onClick={() => handleSend(columnId)}>
+                        <NavigateNextIcon fontSize='inherit' color='inherit' />
+                    </ListItemIcon>}
 
                     <Dialog open={deleteDialogOpen} onClose={handleDeleteDialogClose} >
                         <DialogTitle>Are you sure you want to delete this task?</DialogTitle>
