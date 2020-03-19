@@ -11,21 +11,11 @@ import Column from './Column';
 import AddTaskForm from './AddTaskForm';
 import MobileColumnsContainer from './MobileColumnsContainer';
 
-const initalTasks = [
-  { id: 'task-1', content: '1' },
-  { id: 'task-2', content: '2' },
-  { id: 'task-3', content: '3' },
-  { id: 'task-4', content: '4' },
-  { id: 'task-5', content: '5' },
-  { id: 'task-6', content: '6' },
-  { id: 'task-7', content: '7' },
-  { id: 'task-8', content: '8' },
-  { id: 'task-9', content: '9' },
-];
+const initalTasks = [];
 
-const initialTodoColumn = ['task-1', 'task-2', 'task-3']
-const initialDoingColumn = ['task-4', 'task-5', 'task-6']
-const initialDoneColumn = ['task-7', 'task-8', 'task-9']
+const initialTodoColumn = [];
+const initialDoingColumn = [];
+const initialDoneColumn = [];
 
 const useStyles = makeStyles({
   columns: {
