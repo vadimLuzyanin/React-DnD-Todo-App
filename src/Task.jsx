@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Draggable } from 'react-beautiful-dnd'
 import { makeStyles } from '@material-ui/core'
@@ -18,10 +18,12 @@ import TextField from '@material-ui/core/TextField'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const useStyles = makeStyles(theme => ({
+    listItem: {
+        overflow: 'auto'
+    },
     paper: {
         padding: theme.spacing(2),
         marginBottom: theme.spacing(2),
-
     },
     paperTransition: {
         padding: theme.spacing(2),
@@ -74,6 +76,12 @@ const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTa
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [taskEditValue, setTaskEditValue] = useState(taskContent)
 
+    useEffect(() => {
+        if (!taskEditValue && !editDialogOpen) {
+            setTaskEditValue(taskContent)
+        }
+    }, [taskEditValue, editDialogOpen, taskContent])
+
     const handleEditDialogOpen = () => {
         setEditDialogOpen(true)
     }
@@ -122,7 +130,7 @@ const Task = ({ taskId, taskContent, index, columnId, handleTaskDelete, handleTa
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >
-                    <ListItemText>
+                    <ListItemText className={classes.listItem}>
                         {taskContent}
                     </ListItemText>
                     <div className={classes.buttonContainer}>

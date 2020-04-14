@@ -4,18 +4,24 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
 import Column from './Column';
 import AddTaskForm from './AddTaskForm';
 import MobileColumnsContainer from './MobileColumnsContainer';
+import LocalStorageLoad from './LocalStorageLoad';
+import Title from './Title';
+import LocalStorageSave from './LocalStorageSave';
 
-const initalTasks = [];
+const initalTasks = [
+  { id: 'task-1', content: 'ExampleTodo' },
+  { id: 'task-2', content: 'ExampleDoing' },
+  { id: 'task-3', content: 'ExampleDone' },
+];
 
-const initialTodoColumn = [];
-const initialDoingColumn = [];
-const initialDoneColumn = [];
+const initialTodoColumn = ['task-1'];
+const initialDoingColumn = ['task-2'];
+const initialDoneColumn = ['task-3'];
 
 const useStyles = makeStyles({
   columns: {
@@ -33,7 +39,24 @@ const App = () => {
 
   const [isMobileVersion, setIsMobileVersion] = useState();
 
+  const [isLoadOpen, setIsLoadOpen] = useState(false)
+  const [isSaveOpen, setIsSaveOpen] = useState(false)
 
+  const [selectedList, setSelectedList] = useState()
+
+  const combinedState = {
+    tasksState: [...tasksState],
+    todoColumnState: [...todoColumnState],
+    doingColumnState: [...doingColumnState],
+    doneColumnState: [...doneColumnState],
+  }
+
+  const handleStateLoad = (loadedTasksState, loadedTodoColumnState, loadedDoingColumnState, loadedDoneColumnState) => {
+    setTasksState(loadedTasksState);
+    setTodoColumnState(loadedTodoColumnState);
+    setDoingColumnState(loadedDoingColumnState);
+    setDoneColumnState(loadedDoneColumnState)
+  }
 
   const theme = useTheme();
   const mathches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -147,7 +170,9 @@ const App = () => {
     <Fragment>
       <CssBaseline />
       <Container maxWidth='xl' style={{ overflow: 'hidden' }}>
-        <Typography variant={isMobileVersion ? 'h3' : 'h1'} align='center'>Todo List</Typography>
+        <Title isMobileVersion={isMobileVersion} setIsLoadOpen={setIsLoadOpen} setIsSaveOpen={setIsSaveOpen} />
+        <LocalStorageLoad mobile={isMobileVersion} isLoadOpen={isLoadOpen} setIsLoadOpen={setIsLoadOpen} handleStateLoad={handleStateLoad} selectedList={selectedList} setSelectedList={setSelectedList} />
+        <LocalStorageSave mobile={isMobileVersion} isSaveOpen={isSaveOpen} setIsSaveOpen={setIsSaveOpen} combinedState={combinedState} setSelectedList={setSelectedList} />
         <AddTaskForm mobile={isMobileVersion} handleTaskAddition={handleTaskAddition} />
         <DragDropContext onDragEnd={onDragEnd} >
           {!isMobileVersion && <Box className={classes.columns}>
