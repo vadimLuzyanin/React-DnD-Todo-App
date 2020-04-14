@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/React-DnD-Todo-App/static/js/main.8c83021d.chunk.js",
-    "main.js.map": "/React-DnD-Todo-App/static/js/main.8c83021d.chunk.js.map",
+    "main.js": "/React-DnD-Todo-App/static/js/main.c7a68894.chunk.js",
+    "main.js.map": "/React-DnD-Todo-App/static/js/main.c7a68894.chunk.js.map",
     "runtime-main.js": "/React-DnD-Todo-App/static/js/runtime-main.f206a944.js",
     "runtime-main.js.map": "/React-DnD-Todo-App/static/js/runtime-main.f206a944.js.map",
-    "static/js/2.5e722166.chunk.js": "/React-DnD-Todo-App/static/js/2.5e722166.chunk.js",
-    "static/js/2.5e722166.chunk.js.map": "/React-DnD-Todo-App/static/js/2.5e722166.chunk.js.map",
+    "static/js/2.d95372d7.chunk.js": "/React-DnD-Todo-App/static/js/2.d95372d7.chunk.js",
+    "static/js/2.d95372d7.chunk.js.map": "/React-DnD-Todo-App/static/js/2.d95372d7.chunk.js.map",
     "index.html": "/React-DnD-Todo-App/index.html",
-    "precache-manifest.51f59b249a63ba98f4e475ac29c867b1.js": "/React-DnD-Todo-App/precache-manifest.51f59b249a63ba98f4e475ac29c867b1.js",
+    "precache-manifest.c36b853e1449b5a0a4f3b022bd30e341.js": "/React-DnD-Todo-App/precache-manifest.c36b853e1449b5a0a4f3b022bd30e341.js",
     "service-worker.js": "/React-DnD-Todo-App/service-worker.js",
-    "static/js/2.5e722166.chunk.js.LICENSE.txt": "/React-DnD-Todo-App/static/js/2.5e722166.chunk.js.LICENSE.txt"
+    "static/js/2.d95372d7.chunk.js.LICENSE.txt": "/React-DnD-Todo-App/static/js/2.d95372d7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f206a944.js",
-    "static/js/2.5e722166.chunk.js",
-    "static/js/main.8c83021d.chunk.js"
+    "static/js/2.d95372d7.chunk.js",
+    "static/js/main.c7a68894.chunk.js"
   ]
 }
