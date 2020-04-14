@@ -1,11 +1,11 @@
 React DnD Todo App
 ==========================
 
-This is a simple todo list application
+This is a simple todo list application with Drag and Drop feature
+
+Lists can be saved and loaded from browser local storage
 
 Was built using `react-beautiful-dnd` and `Material-UI`
-
-Layout if fully responsive now 
 
 Live version is available here: 
 ------------------------------
